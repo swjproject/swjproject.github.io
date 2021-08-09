@@ -1359,10 +1359,7 @@ progress {
 
   .col-lg-6 {
     flex: 0 0 auto;
-    width: 80%;
-    /*
     width: 50%;
-    */
   }
 
   .col-lg-7 {
@@ -11118,7 +11115,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("./img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 75%, #000 100%), url("./img/mainpage.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -11130,7 +11127,6 @@ body {
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
 }
@@ -11160,6 +11156,16 @@ body {
   }
 }
 
+.about-pic {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100rem;
+  padding: 15rem 0;
+  background: url("./img/about.jpg");
+  background-position: center;
+  background-size: cover;
+}
 .about-section {
   padding-top: 10rem;
   background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
@@ -11196,8 +11202,12 @@ body {
 }
 
 .references-section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100rem;
   padding: 10rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("./img/bg-signup.jpg");
+  background: url("./img/reference.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;

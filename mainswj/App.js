@@ -8,15 +8,17 @@ import './assets/css/styles.css';
 import './assets/js/scripts.js';
 
 const Stack = createStackNavigator();
-let searchInp = "";
 let index = 0;
-let url = "https://appmockapi.herokuapp.com/author/search?name=";
-let url2 = "http://localhost:3000/search?name=";
+let url = ""
+let url1 = "http://swjsearchapi.herokuapp.com/author/search?name=";
+let url2 = "https://swjlpapi.herokuapp.com/author/search?leadershipposition=";
+let url3 = "http://localhost:8081/search/";
 
 const Main = ({navigation}) => {
   const [name, onChangeName] = React.useState();
+  const [lp, onChangeLP] = React.useState();
 
-  searchInp = "";
+  url = "";
   return (
   <View>
   <head>
@@ -57,29 +59,37 @@ const Main = ({navigation}) => {
               <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                   <div class="d-flex justify-content-center">
                       <div class="text-center">
-                          <Text>{"\n\n"}</Text>
-                          <h1 class="mx-auto my-0 text-uppercase">Society of Women Journalists</h1>
-                            <div class="container px-4 px-lg-5">
-                              <View style={styles.searchContainer}>
-                              <Text>{"\n\n"}</Text>
-                              <Text style={styles.searchInst}>Search for any journalist by</Text>
-                              <Text style={styles.searchInst}>inputting a first name, last name, or pen name</Text>
+                        <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row"}}>
+                          <Text style={{fontSize: 100, justifyContent: "center"}}>
+                            SOCIETY OF WOMEN JOURNALISTS{"\n"}1894 - 1914
+                          </Text>
+                        </View>
+                        <div class="container px-4 px-lg-5">
+                          <View style={styles.searchContainer}>
+                            <Text style={styles.searchInst}>Search for members</Text>
+                            <TextInput style={styles.input}
+                              onChangeText={onChangeName}
+                              value={name}
+                              placeholder="Name..."/>
+                          </View>
 
-                                <TextInput style={styles.input}
-                                  onChangeText={onChangeName}
-                                  value={name}
-                                  placeholder="Name..."/>
 
-                                <Button title="Search"
-                                  color= 'mediumturquoise'
-                                  onPress={() => {
-                                    if (searchInp == "" && name != undefined)
-                                      searchInp = name;
-                                    navigation.navigate('Search Results');
-                                }}/>
-                                <StatusBar style="auto" />
-                            </View>
-                          </div>
+
+                          <View style={styles.searchContainer}>
+                            <TextInput style={styles.input}
+                              onChangeText={onChangeLP}
+                              value={lp}
+                              placeholder="Leadership position..."/>
+                            <Text>{"\n\n"}</Text>
+                            <Button title="Search"
+                              color= 'mediumturquoise'
+                              onPress={() => {
+                                input(name, lp);
+                                navigation.navigate('Search Results');
+                            }}/>
+                            <StatusBar style="auto" />
+                          </View>
+                        </div>
                       </div>
                   </div>
               </div>
@@ -89,88 +99,90 @@ const Main = ({navigation}) => {
               <div class="container px-4 px-lg-5">
                   <div class="row gx-4 gx-lg-5 justify-content-center">
                       <div class="col-lg-8">
-                          <h2 class="text-white mb-4">About Us</h2>
+                          <h2 class="text-white mb-4">About</h2>
                           <p class="text-white-50">
-                              About Us section
+                              About section
                           </p>
                       </div>
                   </div>
-                  <img class="img-fluid" src="https://php-bootstrap.com/templates/grayscale/img/bg-masthead.jpg" alt="..." />
+                  <div class="about-pic"></div>
               </div>
           </section>
 
           <section class="projects-section bg-light" id="contributors">
-              <div class="container px-4 px-lg-5">
-
+            <div class="container px-4 px-lg-5">
               <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-
-                <div class="col-lg-6">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Contributors</h4>
-                                <p class="text-white">Project Director</p>
-                                <p class="mb-0 text-white-50">Laura Vorachek is Associate Professor of English at the University of Dayton. Her research interests include Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
-                                Her publications on nineteenth-century British women journalists include:</p>
-                                <p class="mb-0 text-white-50">“‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.</p>
-                                <p class="mb-0 text-white-50">“Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.</p>
-                                <p class="text-white">Data Entry and Research</p>
-                                <p class="mb-0 text-white-50">Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.</p>
-                                <p class="mb-0 text-white-50">Lexi Gallion received her MA in English from the University of Dayton in 2021. Her Master's thesis analyzes Gertrude Blood's (Lady Colin Campbell) journalism through the lens of the flaneuse.</p>
-                                <p class="text-white">Web Development</p>
-                                <p class="mb-0 text-white-50">Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.</p>
-                                <p class="mb-0 text-white-50">Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.</p>
-                                <p class="mb-0 text-white-50">Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.</p>
-                                <hr class="d-none d-lg-block mb-0 ms-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <View style={styles.contributor}>
+                  <Text style={{textAlign: "justify"}}>
+                    <Text style={{fontWeight: "bold", fontSize: 20}}>Contributors{"\n"}</Text>
+                    <Text style={{fontWeight: "bold"}}>Project Director{"\n"}</Text>
+                    <Text>Laura Vorachek is Associate Professor of English at the University of Dayton. Her research interests include Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
+                    Her publications on nineteenth-century British women journalists include:{"\n"}
+                    “‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.{"\n"}
+                    “Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.{"\n"}
+                    </Text>
+                    <Text style={{fontWeight: "bold"}}>Data Entry and Research{"\n"}</Text>
+                    <Text>Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.{"\n"}</Text>
+                    <Text>Lexi Gallion received her MA in English from the University of Dayton in 2021. Her Master's thesis analyzes Gertrude Blood's (Lady Colin Campbell) journalism through the lens of the flaneuse.{"\n"}</Text>
+                    <Text style={{fontWeight: "bold"}}>Web Development{"\n"}</Text>
+                    <Text>Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.{"\n"}</Text>
+                    <Text>Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.{"\n"}</Text>
+                    <Text>Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.{"\n"}</Text>
+                  </Text>
+                </View>
+              </div>
             </div>
-          </div>
-        </section>
-
-          <section class="references-section" id="references">
-              <div class="container px-4 px-lg-5">
-                  <div class="row gx-4 gx-lg-5">
-                      <div class="col-md-10 col-lg-8 mx-auto text-center">
-                          <h2 class="text-white mb-5">References</h2>
-                          <p class="text-white">In addition to Society of Women Journalists Annual Reports, information about SWJ members was drawn from the following sources:</p>
-                          <p class="text-white">Ancestry (online)</p>
-                          <p class="text-white">At the Circulating Library (online)</p>
-                          <p class="text-white">British Periodicals (online)</p>
-                          <p class="text-white">C19: The Nineteenth Century Index (online)</p>
-                          <p class="text-white">Google Books (online)</p>
-                          <p class="text-white">The Journalist (1886-1909)</p>
-                          <p class="text-white">Myheritage (online)</p>
-                          <p class="text-white">Oxford Dictionary of National Biography (online)</p>
-                          <p class="text-white">Prabook (online)</p>
-                          <p class="text-white">Wikipedia (online)</p>
-                          <p class="text-white">Who Was Who</p>
-                          <p class="text-white">The Woman Journalist (1910-1920)</p>
-                      </div>
-                  </div>
-                </div>
           </section>
 
+        <section id="references">
+            <div class="row gx-0 justify-content-center">
+              <div class="col-lg-6"><div class="references-section"></div></div>
+              <div class="col-lg-6 order-lg-first">
+                <View style={styles.contributor}>
+                  <Text style={{fontWeight: "bold", fontSize: 20, margin: 45, textAlign: "center"}}>References{"\n"}</Text>
+                  <Text style={{fontWeight: "bold", margin: 45, textAlign: "center"}}>In addition to Society of Women Journalists Annual Reports, information about SWJ members was drawn from the following sources:{"\n"}</Text>
+                  <Text style={styles.references}>Ancestry (online){"\n"}</Text>
+                  <Text style={styles.references}>At the Circulating Library (online){"\n"}</Text>
+                  <Text style={styles.references}>British Periodicals (online){"\n"}</Text>
+                  <Text style={styles.references}>C19: The Nineteenth Century Index (online){"\n"}</Text>
+                  <Text style={styles.references}>Google Books (online){"\n"}</Text>
+                  <Text style={styles.references}>The Journalist (1886-1909){"\n"}</Text>
+                  <Text style={styles.references}>Myheritage (online){"\n"}</Text>
+                  <Text style={styles.references}>Oxford Dictionary of National Biography (online){"\n"}</Text>
+                  <Text style={styles.references}>Prabook (online){"\n"}</Text>
+                  <Text style={styles.references}>Wikipedia (online){"\n"}</Text>
+                  <Text style={styles.references}>Who Was Who{"\n"}</Text>
+                  <Text style={styles.references}>The Woman Journalist (1910-1920){"\n\n\n\n"}</Text>
+                </View>
+              </div>
+            </div>
+        </section>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-
-          <script src="/assets/js/scripts.js"></script>
-          <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Society of Women Journalists 2021</div></footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/scripts.js"></script>
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Society of Women Journalists 2021</div></footer>
       </div>
   </View>
 
   )
 }
 
-const SearchDropDown = (inp) => {
+const input = (name, lp) => {
+  if (name != undefined || name != ""){
+    url = url1 + name;
+  }
+  if (name == undefined || name == ""){
+    url = url2 + lp;
+  }
+}
+
+const NameSearchDropDown = (inp) => {
   const [error, setError] = React.useState(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
-    fetch(url2 + inp, {
+    fetch(url3 + inp, {
       method: "GET"})
       .then(res => res.json())
       .then(
@@ -192,15 +204,19 @@ const SearchDropDown = (inp) => {
     } else {
       if (Array.isArray(items) && items.length){
         return items.map((element, i) => {
+          if (i < 5){
             return (
-              <View>
-                <Text style={{backgroundColor: "white"}}>
-                  {element['first_name'] + " " + element['Surname'] + " Pen name: " + element['pen_name']}
-                </Text>
+              <View style={styles.outerDropDownView}>
+                <View style={styles.innerDropDownView}>
+                  <Text style={{backgroundColor: "white", textAlign: "left"}}>
+                    {element['first_name'] + " " + element['Surname'] + " (Pen name: " + element['pen_name'] + ")"}
+                  </Text>
+                </View>
               </View>
             )
+          }
         })
-    }
+      }
     }
 }
 
@@ -210,7 +226,7 @@ const SearchRes = ({navigation}) => {
   const [items, setItems] = React.useState([]);
 
   React.useEffect(() => {
-    fetch(url + searchInp, {
+    fetch(url, {
       method: "GET"})
       .then(res => res.json())
       .then(
@@ -298,7 +314,7 @@ const Bio = () => {
   let ey = "";//end year
 
   React.useEffect(() => {
-    fetch(url + searchInp, {
+    fetch(url, {
       method: "GET"})
       .then(res => res.json())
       .then(
@@ -320,29 +336,29 @@ const Bio = () => {
     } else {
       return items.map((element, i) => {
         if (i == index){
-          if (element['prefix/title'] != null) pf = element['prefix/title'];
-          if (element['first_name'] != null) fn = element['first_name'];
-          if (element['Surname'] != null) sn = element['Surname'];
-          element['pen_name'] != null ? pn = "Pen name: " + element['pen_name'] : pn = "";
-          element.DOB != null ? dob = "Date of Birth: " + element['DOB'] : dob = "";
-          element.DOD != null ? dod = "Date of Death: " + element['DOD'] : dod = "";
-          element['leadership_position'] != null ? lp = "Leadership Position: " + element['leadership_position'] : lp = "";
-          element['street_address'] != null ? sa = "Street Address: " + element['street_address'] : sa = "";
-          element['neighborhood'] != null ? nh = "Neighborhood: " + element['neighborhood'] : nh = "";
-          element['city'] != null ? ct = "City: " + element['city'] : ct = "";
-          element['post_code'] != null ? pc = "Post Code: " + element['post_code'] : pc = "";
-          element['proposer'] != null ? ps = "Proposer: " + element['proposer'] : ps = "";
-          element['org1'] != null ? o1 = "Organization 1: " + element['org1'] : o1 = "";
-          element['org2'] != null ? o2 = "Organization 2: " + element['org2'] : o2 = "";
-          element['org3'] != null ? o3 = "Organization 3: " + element['org3'] : o3 = "";
-          element['org4'] != null ? o4 = "Organization 4: " + element['org4'] : o4 = "";
-          element['org5'] != null ? o5 = "Organization 5: " + element['org5'] : o5 = "";
-          element['periodicals'] != null ? pd = "Periodicals: " + element['periodicals'] : pd = "";
-          element['source_of_info'] != null ? si = "Source of Information: " + element['source_of_info'] : si = "";
-          element['other'] != null ? other = "Other: " + element['other'] : other = "";
-          element['Joined'] != null ? joined = "Joined: " + element['joined'] : joined = "";
-          element['Startyear'] != null ? sy = "Start Year: " + element['Startyear'] : sy = "";
-          element['Endyear'] != null ? ey = "End Year: " + element['Endyear'] : ey = "";
+          if (element['prefix/title'] != "" && element['prefix/title'] != null && element['prefix/title'] != undefined) pf = element['prefix/title'];
+          if (element['first_name'] != "" && element['first_name'] != null && element['first_name'] != undefined) fn = element['first_name'];
+          if (element['Surname'] != "" && element['Surname'] != null && element['Surname'] != undefined) sn = element['Surname'];
+          if (element['pen_name'] != "" && element['pen_name'] != null && element['pen_name'] != undefined) pn = "Pen name: " + element['pen_name'];
+          if (element.DOB != "" && element.DOB != null && element.DOB != undefined) dob = "Date of Birth: " + element['DOB'];
+          if (element.DOD != "" && element.DOD != null && element.DOD != undefined) dod = "Date of Death: " + element['DOD'];
+          if (element['leadership_position'] != "" && element['leadership_position'] != null && element['leadership_position'] != undefined) lp = "Leadership Position: " + element['leadership_position'];
+          if (element['street_address'] != "" && element['street_address'] != null && element['street_address'] != undefined) sa = "Street Address: " + element['street_address'];
+          if (element['neighborhood'] != "" && element['neighborhood'] != null && element['neighborhood'] != undefined) nh = "Neighborhood: " + element['neighborhood'];
+          if (element['city'] != "" && element['city'] != null && element['city'] != undefined) ct = "City: " + element['city'];
+          if (element['post_code'] != "" && element['post_code'] != null && element['post_code'] != undefined) pc = "Post Code: " + element['post_code'];
+          if (element['proposer'] != "" && element['proposer'] != null && element['proposer'] != undefined) ps = "Proposer: " + element['proposer'];
+          if (element['org1'] != "" && element['org1'] != null && element['org1'] != undefined) o1 = "Organization 1: " + element['org1'];
+          if (element['org2'] != "" && element['org2'] != null && element['org2'] != undefined) o2 = "Organization 2: " + element['org2'];
+          if (element['org3'] != "" && element['org3'] != null && element['org3'] != undefined) o3 = "Organization 3: " + element['org3'];
+          if (element['org4'] != "" && element['org4'] != null && element['org4'] != undefined) o4 = "Organization 4: " + element['org4'];
+          if (element['org5'] != "" && element['org5'] != null && element['org5'] != undefined) o5 = "Organization 5: " + element['org5'];
+          if (element['periodicals'] != "" && element['periodicals'] != null && element['periodicals'] != undefined) pd = "Periodicals: " + element['periodicals'];
+          if (element['source_of_info'] != "" && element['source_of_info'] != null && element['source_of_info'] != undefined) si = "Source of Information: " + element['source_of_info'];
+          if (element['other'] != "" && element['other'] != null && element['other'] != undefined) other = "Other: " + element['other'];
+          if (element['Joined'] != "" && element['Joined'] != null && element['Joined'] != undefined) joined = "Joined: " + element['joined'];
+          if (element['Startyear'] != "" && element['Startyear'] != null && element['Startyear'] != undefined) sy = "Start Year: " + element['Startyear'];
+          if (element['Endyear'] != "" && element['Endyear'] != null && element['Endyear'] != undefined) ey = "End Year: " + element['Endyear'];
             return(
               <View>
                 <header class="masthead">
@@ -394,44 +410,39 @@ const App = () => {
 }
 
 const styles = StyleSheet.create({
-  image:{
-    flex: 1,
-    justifyContent: "center"
-  },
-  buttonContainer:{
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
   searchContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  outerDropDownView: {
+    alignItems: "flex-end",
+    end: 40,
+  },
+  innerDropDownView: {
+    marginTop: 0,
+    marginBottom: 10,
+    height: 10,
+    width: 500,
   },
   input: {
     backgroundColor: "white",
     height: 30,
     borderWidth: 2,
-    margin:50,
+    marginBottom: 0,
+    marginTop: 20,
     fontSize: 15,
-  },
-  header: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "white",
-  },
-  searchNav: {
-    fontSize: 25,
-    color: "white",
-    textDecorationLine: 'underline',
   },
   searchInst: {
     fontSize: 20,
     color: "white",
+    marginTop: 20,
   },
-  searchResContainer: {
-    flex: 1,
-    backgroundColor: 'grey',
+  contributor:{
+    backgroundColor: "antiquewhite",
+  },
+  references:{
+    margin: 45,
+    textAlign: "center",
   },
   searchResult: {
     fontSize: 25,
@@ -442,9 +453,6 @@ const styles = StyleSheet.create({
   },
   bio: {
     fontSize: 20,
-  },
-  web: {
-     flex: 1
   },
 });
 
