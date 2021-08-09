@@ -21,147 +21,146 @@ const Main = ({navigation}) => {
   url = "";
   return (
   <View>
-  <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-          <meta name="description" content="" />
-          <meta name="author" content="" />
-          <title>swj</title>
-          <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>swj</title>
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-          <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+      <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
-          <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-          <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-          <link href="/assets/css/styles.css" rel="stylesheet" />
+      <link href="/assets/css/styles.css" rel="stylesheet" />
 
-  </head>
+    </head>
     <div id="page-top">
-          <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#page-top">SWJ</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              Menu
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
+              <li class="nav-item"><a class="nav-link" href="#references">References</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+          <div class="d-flex justify-content-center">
+            <div class="text-center">
+              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row"}}>
+                <Text style={{fontSize: 100, justifyContent: "center"}}>
+                  SOCIETY OF WOMEN JOURNALISTS{"\n"}1894 - 1914
+                </Text>
+              </View>
               <div class="container px-4 px-lg-5">
-                  <a class="navbar-brand" href="#page-top">SWJ</a>
-                  <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                      Menu
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarResponsive">
-                      <ul class="navbar-nav ms-auto">
-                          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                          <li class="nav-item"><a class="nav-link" href="#contributors">Contributors</a></li>
-                          <li class="nav-item"><a class="nav-link" href="#references">References</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </nav>
-
-          <header class="masthead">
-              <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                  <div class="d-flex justify-content-center">
-                      <div class="text-center">
-                        <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row"}}>
-                          <Text style={{fontSize: 100, justifyContent: "center"}}>
-                            SOCIETY OF WOMEN JOURNALISTS{"\n"}1894 - 1914
-                          </Text>
-                        </View>
-                        <div class="container px-4 px-lg-5">
-                          <View style={styles.searchContainer}>
-                            <Text style={styles.searchInst}>Search for members</Text>
-                            <TextInput style={styles.input}
-                              onChangeText={onChangeName}
-                              value={name}
-                              placeholder="Name..."/>
-                          </View>
+                <View style={styles.searchContainer}>
+                  <Text style={styles.searchInst}>Search for members</Text>
+                  <TextInput style={styles.input}
+                    onChangeText={onChangeName}
+                    value={name}
+                    placeholder="Name..."/>
+                </View>
 
 
-
-                          <View style={styles.searchContainer}>
-                            <TextInput style={styles.input}
-                              onChangeText={onChangeLP}
-                              value={lp}
-                              placeholder="Leadership position..."/>
-                            <Text>{"\n\n"}</Text>
-                            <Button title="Search"
-                              color= 'mediumturquoise'
-                              onPress={() => {
-                                input(name, lp);
-                                navigation.navigate('Search Results');
-                            }}/>
-                            <StatusBar style="auto" />
-                          </View>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-          </header>
-
-          <section class="about-section text-center" id="about">
-              <div class="container px-4 px-lg-5">
-                  <div class="row gx-4 gx-lg-5 justify-content-center">
-                      <div class="col-lg-8">
-                          <h2 class="text-white mb-4">About</h2>
-                          <p class="text-white-50">
-                              About section
-                          </p>
-                      </div>
-                  </div>
-                  <div class="about-pic"></div>
-              </div>
-          </section>
-
-          <section class="projects-section bg-light" id="contributors">
-            <div class="container px-4 px-lg-5">
-              <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <View style={styles.contributor}>
-                  <Text style={{textAlign: "justify"}}>
-                    <Text style={{fontWeight: "bold", fontSize: 20}}>Contributors{"\n"}</Text>
-                    <Text style={{fontWeight: "bold"}}>Project Director{"\n"}</Text>
-                    <Text>Laura Vorachek is Associate Professor of English at the University of Dayton. Her research interests include Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
-                    Her publications on nineteenth-century British women journalists include:{"\n"}
-                    “‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.{"\n"}
-                    “Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.{"\n"}
-                    </Text>
-                    <Text style={{fontWeight: "bold"}}>Data Entry and Research{"\n"}</Text>
-                    <Text>Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.{"\n"}</Text>
-                    <Text>Lexi Gallion received her MA in English from the University of Dayton in 2021. Her Master's thesis analyzes Gertrude Blood's (Lady Colin Campbell) journalism through the lens of the flaneuse.{"\n"}</Text>
-                    <Text style={{fontWeight: "bold"}}>Web Development{"\n"}</Text>
-                    <Text>Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.{"\n"}</Text>
-                    <Text>Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.{"\n"}</Text>
-                    <Text>Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.{"\n"}</Text>
-                  </Text>
+                <View style={styles.searchContainer}>
+                  <TextInput style={styles.input}
+                    onChangeText={onChangeLP}
+                    value={lp}
+                    placeholder="Leadership position..."/>
+                  <Text>{"\n\n"}</Text>
+                  <Button title="Search"
+                    color= 'mediumturquoise'
+                    onPress={() => {
+                      input(name, lp);
+                      navigation.navigate('Search Results');
+                  }}/>
+                  <StatusBar style="auto" />
                 </View>
               </div>
             </div>
-          </section>
+          </div>
+        </div>
+      </header>
 
-        <section id="references">
-            <div class="row gx-0 justify-content-center">
-              <div class="col-lg-6"><div class="references-section"></div></div>
-              <div class="col-lg-6 order-lg-first">
-                <View style={styles.contributor}>
-                  <Text style={{fontWeight: "bold", fontSize: 20, margin: 45, textAlign: "center"}}>References{"\n"}</Text>
-                  <Text style={{fontWeight: "bold", margin: 45, textAlign: "center"}}>In addition to Society of Women Journalists Annual Reports, information about SWJ members was drawn from the following sources:{"\n"}</Text>
-                  <Text style={styles.references}>Ancestry (online){"\n"}</Text>
-                  <Text style={styles.references}>At the Circulating Library (online){"\n"}</Text>
-                  <Text style={styles.references}>British Periodicals (online){"\n"}</Text>
-                  <Text style={styles.references}>C19: The Nineteenth Century Index (online){"\n"}</Text>
-                  <Text style={styles.references}>Google Books (online){"\n"}</Text>
-                  <Text style={styles.references}>The Journalist (1886-1909){"\n"}</Text>
-                  <Text style={styles.references}>Myheritage (online){"\n"}</Text>
-                  <Text style={styles.references}>Oxford Dictionary of National Biography (online){"\n"}</Text>
-                  <Text style={styles.references}>Prabook (online){"\n"}</Text>
-                  <Text style={styles.references}>Wikipedia (online){"\n"}</Text>
-                  <Text style={styles.references}>Who Was Who{"\n"}</Text>
-                  <Text style={styles.references}>The Woman Journalist (1910-1920){"\n\n\n\n"}</Text>
-                </View>
-              </div>
+      <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+              <h2 class="text-white mb-4">About</h2>
+              <p class="text-white-50">
+                About section
+              </p>
             </div>
-        </section>
+          </div>
+          <div class="about-pic"></div>
+        </div>
+      </section>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/js/scripts.js"></script>
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Society of Women Journalists 2021</div></footer>
-      </div>
+      <section class="projects-section bg-light" id="contributors">
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <View style={styles.contributor}>
+              <Text style={{textAlign: "justify"}}>
+              <Text style={{fontWeight: "bold", fontSize: 20}}>Contributors{"\n"}</Text>
+              <Text style={{fontWeight: "bold"}}>Project Director{"\n"}</Text>
+              <Text>Laura Vorachek is Associate Professor of English at the University of Dayton. Her research interests include Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
+              Her publications on nineteenth-century British women journalists include:{"\n"}
+              “‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.{"\n"}
+              “Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.{"\n"}
+              </Text>
+              <Text style={{fontWeight: "bold"}}>Data Entry and Research{"\n"}</Text>
+              <Text>Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.{"\n"}</Text>
+              <Text>Lexi Gallion received her MA in English from the University of Dayton in 2021. Her Master's thesis analyzes Gertrude Blood's (Lady Colin Campbell) journalism through the lens of the flaneuse.{"\n"}</Text>
+              <Text style={{fontWeight: "bold"}}>Web Development{"\n"}</Text>
+              <Text>Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.{"\n"}</Text>
+              <Text>Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.{"\n"}</Text>
+              <Text>Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.{"\n"}</Text>
+              </Text>
+            </View>
+          </div>
+        </div>
+      </section>
+
+      <section id="references">
+        <div class="row gx-0 justify-content-center">
+        <div class="col-lg-6"><div class="references-section"></div></div>
+          <div class="col-lg-6 order-lg-first">
+            <View style={styles.contributor}>
+              <Text style={{fontWeight: "bold", fontSize: 20, margin: 45, textAlign: "center"}}>References{"\n"}</Text>
+              <Text style={{fontWeight: "bold", margin: 45, textAlign: "center"}}>In addition to Society of Women Journalists Annual Reports, information about SWJ members was drawn from the following sources:{"\n"}</Text>
+              <Text style={styles.references}>Ancestry (online){"\n"}</Text>
+              <Text style={styles.references}>At the Circulating Library (online){"\n"}</Text>
+              <Text style={styles.references}>British Periodicals (online){"\n"}</Text>
+              <Text style={styles.references}>C19: The Nineteenth Century Index (online){"\n"}</Text>
+              <Text style={styles.references}>Google Books (online){"\n"}</Text>
+              <Text style={styles.references}>The Journalist (1886-1909){"\n"}</Text>
+              <Text style={styles.references}>Myheritage (online){"\n"}</Text>
+              <Text style={styles.references}>Oxford Dictionary of National Biography (online){"\n"}</Text>
+              <Text style={styles.references}>Prabook (online){"\n"}</Text>
+              <Text style={styles.references}>Wikipedia (online){"\n"}</Text>
+              <Text style={styles.references}>Who Was Who{"\n"}</Text>
+              <Text style={styles.references}>The Woman Journalist (1910-1920){"\n\n\n\n"}</Text>
+            </View>
+          </div>
+        </div>
+      </section>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="/assets/js/scripts.js"></script>
+      <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Society of Women Journalists 2021</div></footer>
+    </div>
   </View>
 
   )
@@ -241,7 +240,7 @@ const SearchRes = ({navigation}) => {
       )
   }, [])
 
-  if (error) {
+    if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
