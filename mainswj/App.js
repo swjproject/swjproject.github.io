@@ -10,7 +10,7 @@ import './assets/js/scripts.js';
 const Stack = createStackNavigator();
 let index = 0;
 let url = ""
-let url1 = "http://swjsearchapi.herokuapp.com/author/search?name=";
+let url1 = "https://swjsearchapi.herokuapp.com/author/search?name=";
 let url2 = "https://swjlpapi.herokuapp.com/author/search?leadershipposition=";
 let url3 = "http://localhost:8081/search/";
 
