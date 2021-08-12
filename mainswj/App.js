@@ -63,7 +63,7 @@ const Main = ({navigation}) => {
             <div class="text-center">
               <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 30}}>
                 <Text style={{fontSize: 100, justifyContent: "center"}}>
-                  SOCIETY OF WOMEN JOURNALISTS,{"\n"}1894 - 1914
+                  SOCIETY OF WOMEN JOURNALISTS, {"\n"}1894 - 1914
                 </Text>
               </View>
               <div class="container px-4 px-lg-5">
@@ -113,7 +113,7 @@ const Main = ({navigation}) => {
             <Text style={{fontWeight: "bold"}}>About the Illustrations</Text>
             <Text style={{margin: 20, marginBottom: 0}}><Text>{'\u2B24'}</Text> Fleet Street. Photograph by James Valentine c. 1890. <Text style={{textDecorationLine: "underline", color: "blue"}} onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Fleet_Street#/media/File:Fleet_Street._By_James_Valentine_c.1890..jpg')}>https://en.wikipedia.org/wiki/Fleet_Street#/media/File:Fleet_Street._By_James_Valentine_c.1890..jpg</Text></Text>
             <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> Fleet Street (near intersection with Whitefriars Street; looking toward Farringdon Street and St. Paul’s Cathedral). Photograph by Ann Hale, 3 July 2021, with Édouard Manet’s “Woman Reading” (1880–81) from the Art Institute of Chicago: <Text style={{textDecorationLine: "underline", color: "blue"}} onPress={() => Linking.openURL('https://www.artic.edu/artworks/14591/woman-reading')}>https://www.artic.edu/artworks/14591/woman-reading</Text></Text>
-            <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> “Women Journalists Organize.” <Text style={{fontStyle: "italic"}}>The Journalist</Text> (May 26,1894). Photo by Laura Vorachek, 2018.</Text>
+            <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> “Women Journalists Organize.” <Text style={{fontStyle: "italic"}}>The Journalist</Text> (May 26,1894). Photograph by Laura Vorachek, 2018.</Text>
           </View>
           <div class="about-pic"></div>
         </div>
