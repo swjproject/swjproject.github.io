@@ -171,7 +171,7 @@ const Main = ({navigation}) => {
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
       <script src="/assets/js/scripts.js"></script>
-      <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Laura Vorache 2021</div></footer>
+      <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Laura Vorachek 2021</div></footer>
     </div>
   </View>
 
