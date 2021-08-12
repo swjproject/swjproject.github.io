@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, BackHandler, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, BackHandler, ImageBackground, Linking } from 'react-native';
+import axios from 'axios';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
@@ -12,7 +13,8 @@ let index = 0;
 let url = ""
 let url1 = "https://swjsearchapi.herokuapp.com/author/search?name=";
 let url2 = "https://swjlpapi.herokuapp.com/author/search?leadershipposition=";
-let url3 = "http://localhost:8081/search/";
+let nameSearch = "";
+let lpSearch = "";
 
 const Main = ({navigation}) => {
   const [name, onChangeName] = React.useState();
@@ -59,34 +61,22 @@ const Main = ({navigation}) => {
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
           <div class="d-flex justify-content-center">
             <div class="text-center">
-              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row"}}>
+              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 30}}>
                 <Text style={{fontSize: 100, justifyContent: "center"}}>
                   SOCIETY OF WOMEN JOURNALISTS,{"\n"}1894 - 1914
                 </Text>
               </View>
               <div class="container px-4 px-lg-5">
+                <Text style={styles.searchInst}>Search for members by name, leadership position, or year</Text>
+                <NameSearchUI />
+                <LPSearchUI />
                 <View style={styles.searchContainer}>
-                  <Text style={styles.searchInst}>Search for members</Text>
-                  <TextInput style={styles.input}
-                    onChangeText={onChangeName}
-                    value={name}
-                    placeholder="Name..."/>
-                </View>
-
-
-                <View style={styles.searchContainer}>
-                  <TextInput style={styles.input}
-                    onChangeText={onChangeLP}
-                    value={lp}
-                    placeholder="Leadership position..."/>
-                  <Text>{"\n\n"}</Text>
                   <Button title="Search"
                     color= 'mediumturquoise'
                     onPress={() => {
-                      input(name, lp);
-                      navigation.navigate('Search Results');
+                    input(nameSearch, lpSearch);
+                    navigation.navigate('Search Results');
                   }}/>
-                  <StatusBar style="auto" />
                 </View>
               </div>
             </div>
@@ -94,16 +84,37 @@ const Main = ({navigation}) => {
         </div>
       </header>
 
-      <section class="about-section text-center" id="about">
+      <section class="about-section" id="about">
         <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8">
-              <h2 class="text-white mb-4">About</h2>
-              <p class="text-white-50">
-                About section
-              </p>
-            </div>
-          </div>
+          <View style={{backgroundColor: "antiquewhite"}}>
+            <View style={{alignItems: "center"}}>
+              <Text style={{fontWeight: "bold", fontSize: 30}}>About</Text>
+            </View>
+            <Text style={{fontWeight: "bold"}}>History of the Society of Women Journalists (SWJ)</Text>
+            <Text>
+              The SWJ was formed in the spring of 1894 by J. S. Wood, editor and publisher of <Text style={{fontStyle: "italic"}}>The Gentlewoman</Text>. Charlotte Humphry, who wrote under the pen name “Madge” for <Text style={{fontStyle: "italic"}}>Truth</Text>, was the first president, and Mary Frances Billington, Mrs. Talbot Coke, Lady Colin Campbell, Mrs. Frank Leslie, and Mrs. Arthur Stannard were among the first Vice Presidents. Founded at a time when most press clubs and organizations either excluded women or admitted them only grudgingly, the SWJ offered considerable benefits to members. In addition to space to work, the organization provided a literary advisor to read manuscripts, a lawyer to help negotiate contracts, and numerous networking opportunities through its regular teas, president’s receptions, and lecture series. Though membership fell considerably during World War I, as paper shortages prompted periodicals to furlough staff, by 1945 the organization had rebounded. In 1951, the organization changed its name to the <Text style={{textDecorationLine: "underline", color: "blue"}} onPress={() => Linking.openURL('https://www.swwj.co.uk/')}>Society of Women Writers and Journalists</Text> to reflect its expanding scope. It continues to support women writers today.{"\n\n"}
+            </Text>
+            <Text style={{fontWeight: "bold"}}>About this Project</Text>
+            <Text>This site is a research database of membership in the Society of Women Journalists between 1894 and 1914. It is a searchable, free online resource that currently offers the ability to:</Text>
+            <Text style={{margin: 20, marginBottom: 0}}><Text>{'\u2B24'}</Text> Search by member name</Text>
+            <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> Search by leadership position</Text>
+            <Text style={{margin: 20, marginBottom: 20, marginTop: 0}}><Text>{'\u2B24'}</Text> Search by year of membership</Text>
+            <Text>This project was created in order to 1) recover the identities of women working as journalists at the turn of the twentieth century, 2) map networks of social and professional support among female journalists, 3) recover a more detailed history of the early years of the SWJ, and 4) centralize and make more widely accessible SWJ membership lists.{"\n\n"}</Text>
+            <Text>
+              Membership lists are drawn from the SWJ Annual Reports published between 1898 and 1915. Incomplete runs of the Annual Reports can be found at the British Library, the Bodleian Library, the New York Public Library, and the Toronto Public Library. I have not been able to locate Annual Reports for the first four years of the organization’s existence or for its twentieth year, 1913-1914. I draw on contemporary reports in <Text style={{fontStyle: "italic"}}>The Journalist</Text> about the formation of the SWJ to reconstitute a membership list for its first year, 1894-1895.{"\n\n"}
+            </Text>
+            <Text>
+              The database and website were created by a team of faculty and students at the University of Dayton. The project facilitates student and faculty research on women writers from the turn of the twentieth century and on web development.{"\n\n"}
+            </Text>
+            <Text style={{fontWeight: "bold"}}>Acknowledgements</Text>
+            <Text>
+              This project was funded by a Liberal Arts Scholarship Catalyst Grant (2021) and a Dean’s Summer Fellowship (2021), both awarded by the College of Arts and Sciences at the University of Dayton. A special thank you to Dr. Phu Phung for generously sharing his time and expertise in the web development of this project. This project was inspired by Troy Bassett’s database of nineteenth-century British fiction, At the Circulating Library, and by Andrea Stewart’s research on women writers’ networks during the long nineteenth century.{"\n\n"}
+            </Text>
+            <Text style={{fontWeight: "bold"}}>About the Illustrations</Text>
+            <Text style={{margin: 20, marginBottom: 0}}><Text>{'\u2B24'}</Text> Fleet Street. Photograph by James Valentine c. 1890. <Text style={{textDecorationLine: "underline", color: "blue"}} onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Fleet_Street#/media/File:Fleet_Street._By_James_Valentine_c.1890..jpg')}>https://en.wikipedia.org/wiki/Fleet_Street#/media/File:Fleet_Street._By_James_Valentine_c.1890..jpg</Text></Text>
+            <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> Fleet Street (near intersection with Whitefriars Street; looking toward Farringdon Street and St. Paul’s Cathedral). Photograph by Ann Hale, 3 July 2021, with Édouard Manet’s “Woman Reading” (1880–81) from the Art Institute of Chicago: <Text style={{textDecorationLine: "underline", color: "blue"}} onPress={() => Linking.openURL('https://www.artic.edu/artworks/14591/woman-reading')}>https://www.artic.edu/artworks/14591/woman-reading</Text></Text>
+            <Text style={{margin: 20, marginBottom: 0, marginTop: 0}}><Text>{'\u2B24'}</Text> “Women Journalists Organize.” <Text style={{fontStyle: "italic"}}>The Journalist</Text> (May 26,1894). Photo by Laura Vorachek, 2018.</Text>
+          </View>
           <div class="about-pic"></div>
         </div>
       </section>
@@ -120,13 +131,14 @@ const Main = ({navigation}) => {
               “‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.{"\n"}
               “Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.{"\n"}
               </Text>
-              <Text style={{fontWeight: "bold"}}>Data Entry and Research{"\n"}</Text>
-              <Text>Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.{"\n"}</Text>
+              <Text style={{fontWeight: "bold"}}>{"\n\n"}Data Entry and Research{"\n"}</Text>
+              <Text>Mallory Boring is an English major at the University of Dayton. Her research interests include women writers and representations of women in fiction.{"\n\n"}</Text>
               <Text>Lexi Gallion received her MA in English from the University of Dayton in 2021. Her Master's thesis analyzes Gertrude Blood's (Lady Colin Campbell) journalism through the lens of the flaneuse.{"\n"}</Text>
-              <Text style={{fontWeight: "bold"}}>Web Development{"\n"}</Text>
-              <Text>Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.{"\n"}</Text>
-              <Text>Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.{"\n"}</Text>
-              <Text>Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.{"\n"}</Text>
+              <Text style={{fontWeight: "bold"}}>{"\n\n"}Web Development{"\n"}</Text>
+              <Text>Han Le is a Computer Science major at the University of Dayton. Her research interests include software development in Web applications and their security architecture.{"\n\n"}</Text>
+              <Text>Badri Narayanan Krishnamoorthy Venkataramani is a Master’s student at the University of Dayton. His research interests include Cloud Computing and Software Engineering.{"\n\n"}</Text>
+              <Text>Phu Phung is Associate Professor and Director of the Intelligent Systems Security Lab in the Computer Science Department at the University of Dayton. His research leverages programming language and compiler techniques to enforce security policies to defend against cyber attacks in the areas of JavaScript/Web applications, mobile systems, vehicle systems, and Internet of Things frameworks.{"\n\n"}</Text>
+              <Text>If you would like to contribute information or biographies about Society of Women Journalists members between 1894 and 1914, please contact Laura Vorachek (lvorachek1@udayton.edu).</Text>
               </Text>
             </View>
           </div>
@@ -145,13 +157,13 @@ const Main = ({navigation}) => {
               <Text style={styles.references}>British Periodicals (online){"\n"}</Text>
               <Text style={styles.references}>C19: The Nineteenth Century Index (online){"\n"}</Text>
               <Text style={styles.references}>Google Books (online){"\n"}</Text>
-              <Text style={styles.references}>The Journalist (1886-1909){"\n"}</Text>
+              <Text style={styles.references}><Text style={{fontStyle: "italic"}}>The Journalist</Text> (1886-1909){"\n"}</Text>
               <Text style={styles.references}>Myheritage (online){"\n"}</Text>
-              <Text style={styles.references}>Oxford Dictionary of National Biography (online){"\n"}</Text>
+              <Text style={styles.references}><Text style={{fontStyle: "italic"}}>Oxford Dictionary of National Biography</Text> (online){"\n"}</Text>
               <Text style={styles.references}>Prabook (online){"\n"}</Text>
               <Text style={styles.references}>Wikipedia (online){"\n"}</Text>
-              <Text style={styles.references}>Who Was Who{"\n"}</Text>
-              <Text style={styles.references}>The Woman Journalist (1910-1920){"\n\n\n\n"}</Text>
+              <Text style={styles.references}><Text style={{fontStyle: "italic"}}>Who Was Who{"\n"}</Text></Text>
+              <Text style={styles.references}><Text style={{fontStyle: "italic"}}>The Woman Journalist (1910-1920){"\n\n\n\n"}</Text></Text>
             </View>
           </div>
         </div>
@@ -159,7 +171,7 @@ const Main = ({navigation}) => {
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
       <script src="/assets/js/scripts.js"></script>
-      <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Society of Women Journalists 2021</div></footer>
+      <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Laura Vorache 2021</div></footer>
     </div>
   </View>
 
@@ -175,54 +187,101 @@ const input = (name, lp) => {
   }
 }
 
-const NameSearchDropDown = (inp) => {
-  const [error, setError] = React.useState(null);
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const [items, setItems] = React.useState([]);
+const NameSearchUI = () => {
+  const [name, setName] = React.useState("");
+  const [suggestions, setSuggestions] = React.useState([]);
+  let fn = "";//first_name
+  let sn = "";//Surname
+  let pn = "";//pen_name
 
-  React.useEffect(() => {
-    fetch(url3 + inp, {
-      method: "GET"})
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
-  }, [])
+    React.useEffect(() => {
+      if (name.length >= 1) {
+        fetch(
+          `http://localhost:8081/search/${name}/${name}/${name}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setSuggestions(data)
+          });
+      }
+    }, [name]);
 
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      if (Array.isArray(items) && items.length){
-        return items.map((element, i) => {
-          if (i < 5){
-            return (
-              <View style={styles.outerDropDownView}>
-                <View style={styles.innerDropDownView}>
-                  <Text style={{backgroundColor: "white", textAlign: "left"}}>
-                    {element['first_name'] + " " + element['Surname'] + " (Pen name: " + element['pen_name'] + ")"}
-                  </Text>
-                </View>
+    const handleOnChange = (e) => {
+      e.preventDefault()
+      setName(e.target.value)
+      nameSearch = e.target.value
+    }
+
+    return(
+      <View style={{marginBottom: 30, marginTop: 30}}>
+        <input placeholder="Name..." onChange={(e) => handleOnChange(e)}/>
+        {suggestions && suggestions.map((suggestion, i) => {
+          if (suggestion.first_name != undefined && suggestion.first_name != null && suggestion.first_name != "")
+            fn = suggestion.first_name + " ";
+          if (suggestion.Surname != undefined && suggestion.Surname != null && suggestion.Surname != "")
+            sn = suggestion.Surname + " ";
+          if (suggestion.pen_name != undefined && suggestion.pen_name != null && suggestion.pen_name != "")
+            pn = "(Pen name:" + suggestion.pen_name + ")";
+          return(
+              <View style={{backgroundColor: "white"}}>
+                <Text>{fn + sn + pn}</Text>
               </View>
             )
           }
-        })
-      }
-    }
+        )}
+      </View>
+    )
 }
+
+const LPSearchUI = () => {
+  const [lp, setLP] = React.useState("");
+  const [suggestions, setSuggestions] = React.useState([]);
+  let lpos = "";//leadership_position
+
+    React.useEffect(() => {
+      if (lp.length >= 1) {
+        fetch(
+          `http://localhost:8081/lpsearch/${lp}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setSuggestions(data)
+          });
+      }
+    }, [lp]);
+
+    const handleOnChange = (e) => {
+      e.preventDefault()
+      setLP(e.target.value)
+      lpSearch = e.target.value
+    }
+
+    return(
+      <View style={{marginBottom: 30, marginTop: 30}}>
+        <input placeholder="Leadership position..." onChange={(e) => handleOnChange(e)}/>
+        {suggestions && suggestions.map((suggestion, i) => {
+          if (suggestion.leadership_position != undefined && suggestion.leadership_position != null && suggestion.leadership_position != "")
+            lpos = suggestion.leadership_position + " ";
+          return(
+              <View style={{backgroundColor: "white"}}>
+                <Text>{lpos}</Text>
+              </View>
+            )
+          }
+        )}
+      </View>
+    )
+}
+
 
 const SearchRes = ({navigation}) => {
   const [error, setError] = React.useState(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [items, setItems] = React.useState([]);
+  let fn = "";//first_name
+  let sn = "";//Surname
+  let sy = "";//Startyear
+  let ey = "";//Endyear
 
   React.useEffect(() => {
     fetch(url, {
@@ -247,30 +306,25 @@ const SearchRes = ({navigation}) => {
     } else {
       if (Array.isArray(items) && items.length){
         return items.map((element, i) => {
-          if (element['first_name'] != null){
-            return (
-              <View>
-                <Text onPress={() => {
-                  index = i;
-                  navigation.navigate('Biography')}}
-                  style={styles.searchResult}>
-                  {element['first_name'] + " " + element['Surname'] + "\n(Start Year: " + element['Startyear'] + " - End Year: " + element['Endyear'] + ")"}
-                </Text>
-              </View>
-            )
-          }
-          else if (element['first_name'] == null){
-            return (
-              <View>
-                <Text onPress={() => {
-                  index = i;
-                  navigation.navigate('Biography')}}
-                  style={styles.searchResult}>
-                  {element['Surname'] + "\n(Start Year: " + element['Startyear'] + " - End Year: " + element['Endyear'] + ")"}
-                </Text>
-              </View>
-            )
-          }
+          if (element.first_name != undefined && element.first_name != null && element.first_name != "")
+            fn = element.first_name + " ";
+          if (element.Surname != undefined && element.Surname != null && element.Surname != "")
+            sn = element.Surname + " ";
+          if (element.Startyear != undefined && element.Startyear != null && element.Startyear != "")
+            sy = "(Start Year: " + element.Startyear + " ";
+          if (element.Endyear != undefined && element.Endyear != null && element.Endyear != "")
+            ey = "- End Year: " + element.Endyear + ")";
+          return (
+            <View>
+              <Text onPress={() => {
+                index = i;
+                navigation.navigate('Biography')}}
+                style={styles.searchResult}>
+                {fn + sn}
+              </Text>
+              <Text style={{fontSize: 20}}>{sy + ey}</Text>
+            </View>
+          )
         })
       }
       else {
@@ -434,7 +488,7 @@ const styles = StyleSheet.create({
   searchInst: {
     fontSize: 20,
     color: "white",
-    marginTop: 20,
+    marginTop: 30,
   },
   contributor:{
     backgroundColor: "antiquewhite",
@@ -445,6 +499,8 @@ const styles = StyleSheet.create({
   },
   searchResult: {
     fontSize: 25,
+    color: "blue",
+    textDecorationLine: "underline"
   },
   bioContainer: {
     backgroundColor: 'white',

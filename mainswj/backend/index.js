@@ -20,17 +20,31 @@ let fields = {
   Surname: true,
   first_name: true,
   pen_name: true,
+  leadership_position: true,
 };
 
-app.get('/search/:Surname', function (req, res) {
+app.get('/search/:Surname/:first_name/:pen_name', function (req, res) {
   console.log("Debug: /search/:Surname route is handling the request");
   const db = dbClient.db();
-  let surnameRegEx = new RegExp(req.params.Surname, 'i');
-  let first_nameRegEx = new RegExp(req.params.first_name, 'i');
-  let pen_nameRegEx = new RegExp(req.params.pen_name, 'i');
+  let surnameRegEx = new RegExp(req.params.Surname);
+  let first_nameRegEx = new RegExp(req.params.first_name);
+  let pen_nameRegEx = new RegExp(req.params.pen_name);
+  console.log(surnameRegEx + first_nameRegEx + pen_nameRegEx)
   const cursor = db.collection("authors").find({
     $or:[{Surname:surnameRegEx}, {first_name:first_nameRegEx}, {pen_name:pen_nameRegEx}]
-  }).project(fields);
+  }).project(fields).limit(5);
+  cursor.toArray(function(err, results){
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.get('/lpsearch/:leadership_position', function (req, res) {
+  console.log("Debug: /lpsearch/:leadership_position route is handling the request");
+  const db = dbClient.db();
+  let lpRegEx = new RegExp(req.params.leadership_position);
+  console.log(lpRegEx)
+  const cursor = db.collection("authors").find({leadership_position:lpRegEx}).project(fields).limit(5);
   cursor.toArray(function(err, results){
     console.log(results);
     res.send(results);
