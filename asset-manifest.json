@@ -1,25 +1,29 @@
 {
   "files": {
-    "app.js": "/static/js/app.b5b5bd43.chunk.js",
-    "app.js.map": "/static/js/app.b5b5bd43.chunk.js.map",
+    "app.js": "/static/js/app.c8d8ee55.chunk.js",
+    "app.js.map": "/static/js/app.c8d8ee55.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
     "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
-    "static/js/2.3818d4a3.chunk.js": "/static/js/2.3818d4a3.chunk.js",
-    "static/js/2.3818d4a3.chunk.js.map": "/static/js/2.3818d4a3.chunk.js.map",
+    "static/js/2.f1319a20.chunk.js": "/static/js/2.f1319a20.chunk.js",
+    "static/js/2.f1319a20.chunk.js.map": "/static/js/2.f1319a20.chunk.js.map",
     "favicon-16.png": "/favicon-16.png",
     "favicon-32.png": "/favicon-32.png",
     "favicon.ico": "/favicon.ico",
     "index.html": "/index.html",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "static/js/2.3818d4a3.chunk.js.LICENSE.txt": "/static/js/2.3818d4a3.chunk.js.LICENSE.txt",
+    "static/js/2.f1319a20.chunk.js.LICENSE.txt": "/static/js/2.f1319a20.chunk.js.LICENSE.txt",
     "static/media/Fleet Street-Society of Women Journalists Collage.jpeg": "/static/media/Fleet Street-Society of Women Journalists Collage.1659c7c3.jpeg",
+    "static/media/arrow-down.png": "/static/media/arrow-down.772a5382.png",
+    "static/media/arrow-up.png": "/static/media/arrow-up.0b0d1af9.png",
+    "static/media/close.png": "/static/media/close.b65df71a.png",
     "static/media/mainpage.jpg": "/static/media/mainpage.9217b9a9.jpg",
-    "static/media/reference.jpg": "/static/media/reference.d49b3c23.jpg"
+    "static/media/reference.jpg": "/static/media/reference.d49b3c23.jpg",
+    "static/media/tick.png": "/static/media/tick.3a2306c7.png"
   },
   "entrypoints": [
     "static/js/runtime~app.2e9f1821.js",
-    "static/js/2.3818d4a3.chunk.js",
-    "static/js/app.b5b5bd43.chunk.js"
+    "static/js/2.f1319a20.chunk.js",
+    "static/js/app.c8d8ee55.chunk.js"
   ]
 }
