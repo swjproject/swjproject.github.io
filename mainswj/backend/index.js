@@ -24,7 +24,7 @@ let fields = {
 };
 
 app.get('/search/:Surname/:first_name/:pen_name', function (req, res) {
-  console.log("Debug: /search/:Surname route is handling the request");
+  console.log("Debug: /search/:Surname/:first_name/:pen_name route is handling the request");
   const db = dbClient.db();
   let surnameRegEx = new RegExp(req.params.Surname);
   let first_nameRegEx = new RegExp(req.params.first_name);

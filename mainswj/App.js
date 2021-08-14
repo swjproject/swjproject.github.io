@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, BackHandler, ImageBackground, Linking } from 'react-native';
-import axios from 'axios';
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, BackHandler, ImageBackground, Linking, ScrollView } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
@@ -13,8 +13,10 @@ let index = 0;
 let url = ""
 let url1 = "https://swjsearchapi.herokuapp.com/author/search?name=";
 let url2 = "https://swjlpapi.herokuapp.com/author/search?leadershipposition=";
+let url3 = "https://swjyearapi.herokuapp.com/author/search?startYear=";
 let nameSearch = "";
 let lpSearch = "";
+let yearSearch = "";
 
 const Main = ({navigation}) => {
   const [name, onChangeName] = React.useState();
@@ -61,7 +63,7 @@ const Main = ({navigation}) => {
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
           <div class="d-flex justify-content-center">
             <div class="text-center">
-              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 30}}>
+              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 20, marginTop: 5}}>
                 <Text style={{fontSize: 100, justifyContent: "center"}}>
                   SOCIETY OF WOMEN JOURNALISTS,{"\n"}1894 - 1914
                 </Text>
@@ -70,11 +72,12 @@ const Main = ({navigation}) => {
                 <Text style={styles.searchInst}>Search for members by name, leadership position, or year</Text>
                 <NameSearchUI />
                 <LPSearchUI />
+                <YearSearchUI />
                 <View style={styles.searchContainer}>
                   <Button title="Search"
                     color= 'mediumturquoise'
                     onPress={() => {
-                    input(nameSearch, lpSearch);
+                    input(nameSearch, lpSearch, yearSearch);
                     navigation.navigate('Search Results');
                   }}/>
                 </View>
@@ -126,7 +129,7 @@ const Main = ({navigation}) => {
               <Text style={{textAlign: "justify"}}>
               <Text style={{fontWeight: "bold", fontSize: 20}}>Contributors{"\n"}</Text>
               <Text style={{fontWeight: "bold"}}>Project Director{"\n"}</Text>
-              <Text>Laura Vorachek is Associate Professor of English at the University of Dayton. Her research interests include Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
+              <Text>Laura Vorachek is Associate Professor of English at the University of Dayton. Her research focuses on Victorian periodicals, Victorian literature, Jane Austen, and detective fiction.
               Her publications on nineteenth-century British women journalists include:{"\n"}
               “‘How little I cared for fame’: T. Sparrow and Women’s Investigative Journalism at the Fin de Siècle.” Victorian Periodicals Review, vol. 49, no. 2, 2016, pp. 333-61.{"\n"}
               “Playing Italian: Cross-Cultural Dress and Investigative Journalism at the Fin de Siècle.”  Victorian Periodicals Review, vol. 45, no. 4, 2012, pp. 406-35.{"\n"}
@@ -178,14 +181,75 @@ const Main = ({navigation}) => {
   )
 }
 
-const input = (name, lp) => {
+const input = (name, lp, y) => {
   if (name != undefined || name != ""){
     url = url1 + name;
   }
   if (name == undefined || name == ""){
-    url = url2 + lp;
+    if (yearSearch != undefined || yearSearch != "")
+      url = url3 + y;
+    if (yearSearch == undefined || yearSearch == "")
+      url = url2 + lp;
   }
 }
+
+const YearSearchUI = () => {
+  const [year, setYear] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(null);
+  const [items, setItems] = React.useState([
+    {label: '1894 - 1895', value: '1894'},
+    {label: '1895 - 1896', value: '1895'},
+    {label: '1896 - 1897', value: '1896'},
+    {label: '1897 - 1898', value: '1897'},
+    {label: '1898 - 1899', value: '1898'},
+    {label: '1899 - 1900', value: '1899'},
+    {label: '1900 - 1901', value: '1900'},
+    {label: '1901 - 1902', value: '1901'},
+    {label: '1902 - 1903', value: '1902'},
+    {label: '1903 - 1904', value: '1903'},
+    {label: '1904 - 1905', value: '1904'},
+    {label: '1905 - 1906', value: '1905'},
+    {label: '1906 - 1907', value: '1906'},
+    {label: '1907 - 1908', value: '1907'},
+    {label: '1908 - 1909', value: '1908'},
+    {label: '1909 - 1910', value: '1909'},
+    {label: '1910 - 1911', value: '1910'},
+    {label: '1911 - 1912', value: '1911'},
+    {label: '1912 - 1913', value: '1912'},
+    {label: '1913 - 1914', value: '1913'},
+  ]);
+
+  yearSearch = year;
+  return (
+    <View style={styles.yearSearchContainer}>
+      <ScrollView nestedScrollEnabled={true} style={{flex: 1}} contentContainerStyle={{flexGrow:2}}>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            defaultValue={year}
+            placeholder="Select a year"
+            searchable={false}
+            containerStyle={{ height: 100 }}
+            style={{ backgroundColor: '#fafafa' }}
+            dropDownStyle={{ backgroundColor: '#fafafa' }}
+            dropDownMaxHeight={100}
+            labelStyle={{ fontSize: 15 }}
+            itemStyle={{
+              justifyContent: 'flex-start'
+            }}
+            onChangeValue={value => setYear(value)}
+            showTickIcon={false}
+          />
+         </ScrollView>
+     </View>
+ );
+}
+
 
 const NameSearchUI = () => {
   const [name, setName] = React.useState("");
@@ -213,18 +277,26 @@ const NameSearchUI = () => {
     }
 
     return(
-      <View style={{marginBottom: 30, marginTop: 30}}>
+      <View style={{marginBottom: 15, marginTop: 15}}>
         <input placeholder="Name..." onChange={(e) => handleOnChange(e)}/>
         {suggestions && suggestions.map((suggestion, i) => {
           if (suggestion.first_name != undefined && suggestion.first_name != null && suggestion.first_name != "")
             fn = suggestion.first_name + " ";
+          else if (suggestion.first_name == undefined || suggestion.first_name == null || suggestion.first_name != "")
+              fn = "";
           if (suggestion.Surname != undefined && suggestion.Surname != null && suggestion.Surname != "")
             sn = suggestion.Surname + " ";
+          else if (suggestion.Surname == undefined || suggestion.Surname == null || suggestion.Surname != "")
+            sn = "";
           if (suggestion.pen_name != undefined && suggestion.pen_name != null && suggestion.pen_name != "")
             pn = "(Pen name:" + suggestion.pen_name + ")";
+          else if (suggestion.pen_name == undefined || suggestion.pen_name == null || suggestion.pen_name != "")
+            pn = "";
           return(
               <View style={{backgroundColor: "white"}}>
-                <Text>{fn + sn + pn}</Text>
+                <Text style={{borderWidth: 1}}>
+                  {fn + sn + pn}
+                </Text>
               </View>
             )
           }
@@ -257,14 +329,14 @@ const LPSearchUI = () => {
     }
 
     return(
-      <View style={{marginBottom: 30, marginTop: 30}}>
+      <View style={{marginBottom: 15, marginTop: 15}}>
         <input placeholder="Leadership position..." onChange={(e) => handleOnChange(e)}/>
         {suggestions && suggestions.map((suggestion, i) => {
           if (suggestion.leadership_position != undefined && suggestion.leadership_position != null && suggestion.leadership_position != "")
             lpos = suggestion.leadership_position + " ";
           return(
               <View style={{backgroundColor: "white"}}>
-                <Text>{lpos}</Text>
+                <Text style={{borderWidth: 1}}>{lpos}</Text>
               </View>
             )
           }
@@ -330,7 +402,7 @@ const SearchRes = ({navigation}) => {
       else {
         return (
           <View>
-            <Text style={styles.searchResult}>No result matched</Text>
+            <Text style={{fontSize: 25}}>No result matched</Text>
           </View>
         )
       }
@@ -467,16 +539,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  outerDropDownView: {
-    alignItems: "flex-end",
-    end: 40,
-  },
-  innerDropDownView: {
-    marginTop: 0,
-    marginBottom: 10,
-    height: 10,
-    width: 500,
-  },
   input: {
     backgroundColor: "white",
     height: 30,
@@ -488,7 +550,12 @@ const styles = StyleSheet.create({
   searchInst: {
     fontSize: 20,
     color: "white",
-    marginTop: 30,
+    marginBottom: 20,
+  },
+  yearSearchContainer:{
+    flex: 1,
+    justifyContent: 'center',
+    padding: 1,
   },
   contributor:{
     backgroundColor: "antiquewhite",
