@@ -11,9 +11,10 @@ import './assets/js/scripts.js';
 const Stack = createStackNavigator();
 let index = 0;
 let url = ""
-let url1 = "https://swjsearchapi.herokuapp.com/author/search?name=";
-let url2 = "https://swjlpapi.herokuapp.com/author/search?leadershipposition=";
-let url3 = "https://swjyearapi.herokuapp.com/author/search?startYear=";
+let url1 = "https://swjproject.herokuapp.com/public/author/namesearch?name=";
+let url2 = "https://swjproject.herokuapp.com/public/author/lpsearch?leadershipposition=";
+let url3 = "https://swjproject.herokuapp.com/public/author/yearsearch?startYear=";
+
 let nameSearch = "";
 let lpSearch = "";
 let yearSearch = "";
@@ -378,25 +379,32 @@ const SearchRes = ({navigation}) => {
     } else {
       if (Array.isArray(items) && items.length){
         return items.map((element, i) => {
-          if (element.first_name != undefined && element.first_name != null && element.first_name != "")
-            fn = element.first_name + " ";
-          if (element.Surname != undefined && element.Surname != null && element.Surname != "")
-            sn = element.Surname + " ";
-          if (element.Startyear != undefined && element.Startyear != null && element.Startyear != "")
-            sy = "(Start Year: " + element.Startyear + " ";
-          if (element.Endyear != undefined && element.Endyear != null && element.Endyear != "")
-            ey = "- End Year: " + element.Endyear + ")";
-          return (
-            <View>
-              <Text onPress={() => {
-                index = i;
-                navigation.navigate('Biography')}}
-                style={styles.searchResult}>
-                {fn + sn}
-              </Text>
-              <Text style={{fontSize: 20}}>{sy + ey}</Text>
-            </View>
-          )
+          if (element.first_name != null){
+            return (
+              <View>
+                <Text onPress={() => {
+                  index = i;
+                  navigation.navigate('Biography')}}
+                  style={styles.searchResult}>
+                  {element.first_name + " " + element.Surname + "\n"}
+                </Text>
+                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear}</Text>
+              </View>
+            )
+          }
+          else if (element.first_name == null){
+            return (
+              <View>
+                <Text onPress={() => {
+                  index = i;
+                  navigation.navigate('Biography')}}
+                  style={styles.searchResult}>
+                  {element.Surname + "\n"}
+                </Text>
+                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear}</Text>
+              </View>
+            )
+          }
         })
       }
       else {
