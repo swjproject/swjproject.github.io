@@ -388,7 +388,7 @@ const SearchRes = ({navigation}) => {
                   style={styles.searchResult}>
                   {element.first_name + " " + element.Surname + "\n"}
                 </Text>
-                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear}</Text>
+                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear + ")"}</Text>
               </View>
             )
           }
@@ -401,7 +401,7 @@ const SearchRes = ({navigation}) => {
                   style={styles.searchResult}>
                   {element.Surname + "\n"}
                 </Text>
-                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear}</Text>
+                <Text style={{fontSize: 20}}>{"(Start year: " + element.Startyear + " - End year: " + element.Endyear + ")"}</Text>
               </View>
             )
           }
