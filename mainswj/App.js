@@ -224,7 +224,7 @@ const YearSearchUI = () => {
   yearSearch = year;
   return (
     <View style={styles.yearSearchContainer}>
-      <ScrollView nestedScrollEnabled={true} style={{flex: 1}} contentContainerStyle={{flexGrow:2}}>
+      <ScrollView nestedScrollEnabled={true} style={{flex: 2}} contentContainerStyle={{flexGrow: 1}}>
           <DropDownPicker
             open={open}
             value={value}
@@ -235,7 +235,7 @@ const YearSearchUI = () => {
             defaultValue={year}
             placeholder="Select a year"
             searchable={false}
-            containerStyle={{ height: 100 }}
+            containerStyle={{ height: 200 }}
             style={{ backgroundColor: '#fafafa' }}
             dropDownStyle={{ backgroundColor: '#fafafa' }}
             dropDownMaxHeight={100}
@@ -246,7 +246,7 @@ const YearSearchUI = () => {
             onChangeValue={value => setYear(value)}
             showTickIcon={false}
           />
-         </ScrollView>
+      </ScrollView>
      </View>
  );
 }
@@ -262,7 +262,7 @@ const NameSearchUI = () => {
     React.useEffect(() => {
       if (name.length >= 1) {
         fetch(
-          `http://localhost:8081/search/${name}/${name}/${name}`
+          `https://swjproject.herokuapp.com/public/author/ajaxsearch?name=${name}`
         )
           .then((res) => res.json())
           .then((data) => {
@@ -293,14 +293,16 @@ const NameSearchUI = () => {
             pn = "(Pen name:" + suggestion.pen_name + ")";
           else if (suggestion.pen_name == undefined || suggestion.pen_name == null || suggestion.pen_name != "")
             pn = "";
-          return(
-              <View style={{backgroundColor: "white"}}>
-                <Text style={{borderWidth: 1}}>
-                  {fn + sn + pn}
-                </Text>
-              </View>
-            )
+          if (i < 5){
+            return(
+                <View style={{backgroundColor: "white"}}>
+                  <Text style={{borderWidth: 1}}>
+                    {fn + sn + pn}
+                  </Text>
+                </View>
+              )
           }
+        }
         )}
       </View>
     )
@@ -314,7 +316,7 @@ const LPSearchUI = () => {
     React.useEffect(() => {
       if (lp.length >= 1) {
         fetch(
-          `http://localhost:8081/lpsearch/${lp}`
+          `https://swjproject.herokuapp.com/public/author/lpsearch?leadershipposition=${lp}`
         )
           .then((res) => res.json())
           .then((data) => {
