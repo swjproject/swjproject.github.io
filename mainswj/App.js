@@ -64,7 +64,7 @@ const Main = ({navigation}) => {
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
           <div class="d-flex justify-content-center">
             <div class="text-center">
-              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 20, marginTop: 5}}>
+              <View style={{backgroundColor: "white", flex: 1, width: 1000, flexDirection: "row", marginBottom: 20, marginTop: 100}}>
                 <Text style={{fontSize: 100, justifyContent: "center"}}>
                   SOCIETY OF WOMEN JOURNALISTS, {"\n"}1894 - 1914
                 </Text>
