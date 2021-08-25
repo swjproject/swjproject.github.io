@@ -316,7 +316,7 @@ const LPSearchUI = () => {
     React.useEffect(() => {
       if (lp.length >= 1) {
         fetch(
-          `https://swjproject.herokuapp.com/public/author/lpsearch?leadershipposition=${lp}`
+          `https://swjproject.herokuapp.com/public/author/lpajaxsearch?leadershipposition=${lp}`
         )
           .then((res) => res.json())
           .then((data) => {
